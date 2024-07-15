@@ -17,6 +17,12 @@ const Post = () => {
   );
   console.log(data);
 
+  if (status === "loading"){
+    return <div>Loading</div>
+  }else if (status === "error"){
+    return <div>Error</div>
+  }
+
   return (
     <div>
       <Body>{data.title}</Body>
