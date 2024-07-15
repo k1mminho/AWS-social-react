@@ -25,15 +25,17 @@ export const changedEmail = async () => {
 // email verify
 export const verifyEmail = async (email: string) => {
   const res = await axios.post("/join/verifyEmail", { email });
+  console.log(res.data)
   return res.data;
 };
 // join code
 export const checkedCode = async (code: number) => {
   const res = await axios.post("/join/checkJoinCode", { code });
+  console.log(res.data)
   return res.data;
 }
 // nickname duplicate check
-export const checkNickname = async (nickname: string) => {
+export const checkedNickname = async (nickname: string) => {
   const res = await axios.post("/join/checkDuplicationNickname", { nickname });
   return res.data;
 }
