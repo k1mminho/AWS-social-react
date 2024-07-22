@@ -12,3 +12,12 @@ export const postGroupChatroom = async (body: {}) => {
   const res = await axios.get("/groupChatroom/Post", body);
   return res.data;
 };
+
+export const getGroupPosts = async () => {
+  const res = await axios.get("/groupPost");
+  return res.data;
+};
+export const getGroupPost = async (postId: string) => {
+  const res = await axios.get(`/groupPost/${postId}`);
+  return res.data;
+};

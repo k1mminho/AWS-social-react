@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { getPosts } from "../service/api/postAPI";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getGroupPosts } from "../service/api/groupChatAPI";
+import { useAuthContext } from "../context/AuthContext";
 
-interface posts {
+interface groupPosts {
   postId: number;
   title: string;
   content: string;
@@ -12,11 +13,16 @@ interface posts {
   readhit: number;
   likes: number;
 }
-const Posts = () => {
+
+const GroupPosts = () => {
+  
+  const { memoUserInfo } = useAuthContext();
+  const { isLoggedIn, userInfo } = memoUserInfo;
+
   const [state, setState] = useState("get");
 
   const navigate = useNavigate();
-  const { data, status } = useQuery(["getPosts"], () => getPosts(), {
+  const { data, status } = useQuery(["getGroupPosts"], () => getGroupPosts(), {
     retry: false,
     refetchIntervalInBackground: false,
   });
@@ -28,17 +34,28 @@ const Posts = () => {
   if (status === "error") {
     return <h2>Error</h2>;
   }
+
+  if (!isLoggedIn) {
+    return (
+      <div>
+        <h2>로그인 후 이용 가능한 컨텐츠입니다</h2>
+        <Link to="/">로그인 하러가기</Link>
+      </div>
+    );
+  }
+
+
   return (
     <div>
       {state == "get"
-        ? data?.map((post: posts) => (
+        ? data?.map((groupPost: groupPosts) => (
             <div
               style={{ border: "1px solid black" }}
-              // onClick={() => navigate(`/post/${post.postId}`)}
-              key={post.postId}
+              // onClick={() => navigate(`/groupPost/${groupPost.postId}`)}
+              key={groupPost.postId}
             >
-              <div>{post.title}</div>
-              <div>{post.content}</div>
+              <div>{groupPost.title}</div>
+              <div>{groupPost.content}</div>
               <button onClick={() => setState("post")}>모임 만들기</button>
             </div>
           ))
@@ -57,4 +74,4 @@ const Posts = () => {
   );
 };
 
-export default Posts;
+export default GroupPosts;

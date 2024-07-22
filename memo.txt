@@ -1,0 +1,4 @@
+
+내일 할거
+groupPost 마저 완성
+groupPost 관련 axios 설정하기
