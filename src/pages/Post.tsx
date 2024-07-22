@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { getPost } from "../service/api/postAPI";
 import styled from "styled-components";
+import { useAuthContext } from "../context/AuthContext";
+import { useParams } from "react-router-dom";
 
 const Body = styled.div`
   display: grid;
@@ -9,13 +11,15 @@ const Body = styled.div`
   border: 1px solid black;
 `;
 const Post = () => {
-  let postId: number = 1;
+  const {memoUserInfo} = useAuthContext();
+  const {isLoggedIn, userInfo} = memoUserInfo;
+  const{postId} = useParams()
+
   const { data, status } = useQuery(
     ["getPost", postId],
-    () => getPost(postId),
+    () => getPost(postId as string),
     { retry: false, refetchIntervalInBackground: false }
   );
-  console.log(data);
 
   if (status === "loading"){
     return <div>Loading</div>
@@ -25,7 +29,7 @@ const Post = () => {
 
   return (
     <div>
-      <Body>{data.title}</Body>
+      <Body>{data.title} <hr />{data.content}</Body>
     </div>
   );
 };

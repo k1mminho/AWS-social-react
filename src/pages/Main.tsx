@@ -22,7 +22,7 @@ const Main = () => {
 
     if (result.message === "success") {
       login(result.userInfo);
-      if (array.includes(location.state)) navigate("/post");
+      if (array.includes(location.state)) navigate("/posts");
       else navigate(-1);
     } else if (result.message === "blocked") {
       // blocked 처리
