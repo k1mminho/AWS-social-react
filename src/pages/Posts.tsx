@@ -30,6 +30,7 @@ const Posts = () => {
   }
   return (
     <div>
+      <button type="button" onClick={()=>navigate('/write')}>write</button>
       {state == "get"
         ? data?.map((post: posts) => (
             <div

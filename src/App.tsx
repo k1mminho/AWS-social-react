@@ -4,6 +4,7 @@ import Post from './pages/Post';
 import Main from './pages/Main';
 import Join from './pages/Join';
 import Posts from './pages/Posts';
+import Write from './pages/Write';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/join' element={<Join/>}/>
         <Route path='/post/:postId' element={<Post/>}/>
         <Route path='/posts' element={<Posts/>}/>
+        <Route path='/write' element={<Write/>}/>
       </Routes>
     </div>
   );
