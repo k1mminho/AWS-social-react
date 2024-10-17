@@ -5,6 +5,8 @@ import Main from './pages/Main';
 import Join from './pages/Join';
 import Posts from './pages/Posts';
 import Write from './pages/Write';
+import GroupChatrooms from './pages/GroupChatrooms';
+import GroupChatCreate from './pages/GroupChatCreate';
 
 function App() {
   return (
@@ -15,6 +17,9 @@ function App() {
         <Route path='/post/:postId' element={<Post/>}/>
         <Route path='/posts' element={<Posts/>}/>
         <Route path='/write' element={<Write/>}/>
+        <Route path='/groupChatroom' element={<GroupChatrooms/>}>
+          <Route path='create' element={<GroupChatCreate/>}/>
+        </Route>
       </Routes>
     </div>
   );

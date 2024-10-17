@@ -31,6 +31,8 @@ const Posts = () => {
   return (
     <div>
       <button type="button" onClick={()=>navigate('/write')}>write</button>
+      <button type="button" onClick={()=>navigate('/groupChatroom')}>my group</button>
+      <button type="button" onClick={()=>navigate('/groupChatroom/create')}>create group</button>
       {state == "get"
         ? data?.map((post: posts) => (
             <div
