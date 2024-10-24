@@ -22,7 +22,7 @@ const Main = () => {
 
     if (result.message === "success") {
       login(result.userInfo);
-      if (array.includes(location.state)) navigate("/posts");
+      if (array.includes(location.state)) navigate("/post/list");
       else navigate(-1);
     } else if (result.message === "blocked") {
       // blocked 처리
@@ -41,6 +41,8 @@ const Main = () => {
         <button type="submit">Login</button>
       </form>
       <Link to="/join">회원가입 하기</Link>
+      <br />
+      <Link to="/posts">비회원</Link>
     </div>
   );
 };

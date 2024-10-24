@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { getPosts } from "../service/api/postAPI";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface posts {
   postId: number;
@@ -13,7 +13,6 @@ interface posts {
   likes: number;
 }
 const Posts = () => {
-  const [state, setState] = useState("get");
 
   const navigate = useNavigate();
   const { data, status } = useQuery(["getPosts"], () => getPosts(), {
@@ -30,11 +29,10 @@ const Posts = () => {
   }
   return (
     <div>
-      <button type="button" onClick={()=>navigate('/write')}>write</button>
+      <button type="button" onClick={()=>navigate('/post/write')}>write</button>
       <button type="button" onClick={()=>navigate('/groupChatroom')}>my group</button>
       <button type="button" onClick={()=>navigate('/groupChatroom/create')}>create group</button>
-      {state == "get"
-        ? data?.map((post: posts) => (
+      {data?.map((post: posts) => (
             <div
               style={{ border: "1px solid black" }}
               onClick={() => navigate(`/post/${post.postId}`)}
@@ -42,17 +40,12 @@ const Posts = () => {
             >
               <div>{post.title}</div>
               <div>{post.content}</div>
-              <button onClick={() => setState("post")}></button>
             </div>
-          ))
-        : state == 'post' ? <div>
-          <form action="submit">
-            <input type="text" name="title" />
-            <input type="text" />
-          </form>
-        </div> : <div></div> }
+          ))}
     </div>
-  );
+  
+
+);
 };
 
 export default Posts;
